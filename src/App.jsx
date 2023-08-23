@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { AddProduct } from './components/admin/AddProduct';
 import { ListProduct } from './components/admin/ListProduct';
 import { Product } from './components/products/Product';
 import './styles/index.css';
+import { productReducer } from './reducers/productReducer';
 
 const initialProducts = [
   {
@@ -37,7 +38,8 @@ const initialProducts = [
 
 function App() {
 
-  const [products, setProducts] = useState(initialProducts)
+  //const [products, setProducts] = useState(initialProducts)
+  const [ products ] = useReducer(productReducer, initialProducts);
 
   const onClickAddProducts = (e, form) => {
     e.preventDefault();
