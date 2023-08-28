@@ -1,9 +1,11 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useContext } from 'react';
 import { AddProduct } from './components/admin/AddProduct';
 import { ListProduct } from './components/admin/ListProduct';
 import { Product } from './components/products/Product';
 import './styles/index.css';
 import { productReducer } from './reducers/productReducer';
+import { AuthProvider } from './components/providers/AuthProvider';
+import { AuthContext } from './components/contexts/AuthContext';
 
 const initialProducts = [
   {
@@ -42,7 +44,8 @@ function App() {
   const [ products, dispatch ] = useReducer(productReducer, initialProducts);
   const [editProd, setEditProd] = useState();
   const [edit, setEdit] = useState(false);
-  const [user, setUser] = useState({isLogeed: false, name: null})
+ //const [user, setUser] = useState({isLogeed: false, name: null})
+ const { user } = useContext(AuthContext);
 
   const onClickAddProducts = (e, form) => {
     e.preventDefault();

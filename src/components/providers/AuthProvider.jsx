@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 export const AuthProvider = ({children}) => {
-    const user = { 
-        isLogged: false,
-        name: null
+    const [user, setUser] = useState({ isLogeed: false, name: null})
+
+    const login = () =>{
+        setUser({ isLogeed: True, name: 'Ariel Medina'})
     }
 
     return (
         <AuthContext.Provider value={{
-            user: user
+            user: user,
+            login
         }}>
             {children}
         </AuthContext.Provider>
