@@ -39,12 +39,67 @@ const initialProducts = [
 function App() {
 
   //const [products, setProducts] = useState(initialProducts)
-  const [ products ] = useReducer(productReducer, initialProducts);
+  const [ products, dispatch ] = useReducer(productReducer, initialProducts);
+  const [editProd, setEditProd] = useState();
+  const [edit, setEdit] = useState(false);
 
   const onClickAddProducts = (e, form) => {
     e.preventDefault();
     console.log(form);
-}
+    if(edit!=true) {
+      const newProductObjets = {
+      id: new Date().getTime(),
+      title: form.title,
+      category: form.category,
+      price: form.price,
+      description: form.description
+      }
+      //setProducts([...products, newProductObjets])
+      dispatch({
+        type: '[Product] - ADD-PRODUCT',
+        payload : newProductObjets
+      });
+
+      setEditProd({
+        id: '',
+        title: '',
+        category: '',
+        price: '',
+        description: ''
+      });
+      setEdit(new Date().getTime());
+  } else {
+      const resulEdit = products.map((prd) => { if (prd.id === form.id) {return form} else {return prd} } )
+      //console.log(resulEdit)
+      dispatch({
+        type: '[Product] - EDIT-PRODUCT',
+        payload : resulEdit
+      });
+      setEditProd({
+        id: '',
+        title: '',
+        category: '',
+        price: '',
+        description: ''
+      });
+      setEdit(false);
+
+  }
+  }
+  const deleteProducto = (prdid)  => {
+    //console.log(prdid);
+    const resulDelete = products.filter((prd)=> prd.id != prdid);
+    dispatch({
+      type:'[Product] - DELETE-PRODUCT',
+      payload: resulDelete
+    });
+  }
+
+  const editProducto = (prd) => {
+    //console.log(prd);
+    setEditProd(prd);
+    setEdit(true);
+  }
   return (
     <>
       <div className="container-fliud">
@@ -54,8 +109,8 @@ function App() {
             </div>
         </div>
         <div className="row"  style={{ backgroundColor: '#000', padding:50}}>
-            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)}/>
-            <ListProduct />
+            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} editProd={editProd} edit={edit} />
+            <ListProduct products={products} deleteProducto={deleteProducto} editProducto={editProducto} edit={edit}/>
         </div>
           <div className='row p-5'>
             <Product products={products} />

@@ -2,9 +2,8 @@ import React from 'react'
 
 export const Product = ({products}) => {
 
-    
-
   return (
+
     <>
     {products.map( (prod) => 
     <div key= {prod.id} className="col-lg-4">
