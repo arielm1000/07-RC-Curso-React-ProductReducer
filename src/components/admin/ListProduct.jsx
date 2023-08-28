@@ -31,6 +31,7 @@ export const ListProduct = ({products, deleteProducto, editProducto, edit} ) => 
                     <button 
                         className='btn btn-danger  btn-sm'
                         onClick={()=>deleteProducto(prd.id)}
+                        disabled={edit!= true ? false : true}
                     >Eliminar</button>
                 </td>
                 </tr>
