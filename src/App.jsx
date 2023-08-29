@@ -6,6 +6,7 @@ import './styles/index.css';
 import { productReducer } from './reducers/productReducer';
 import { AuthProvider } from './components/providers/AuthProvider';
 import { AuthContext } from './components/contexts/AuthContext';
+import { NavBar } from './components/admin/NavBar';
 
 const initialProducts = [
   {
@@ -107,6 +108,9 @@ function App() {
   return (
     <>
       <div className="container-fliud">
+        <div>
+          <NavBar/>
+        </div>
         <div className="row text-center mb-5 mt-5">
             <div className="col-lg-7 mx-auto">
                 <h1 className="display-4" style={{  fontWeight:'lighter'}}>Product Reducer</h1>

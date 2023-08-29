@@ -5,7 +5,7 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState({ isLogeed: false, name: null})
 
     const login = () =>{
-        setUser({ isLogeed: True, name: 'Ariel Medina'})
+        setUser({ isLogeed: true, name: 'Ariel Medina'})
     }
 
     return (
