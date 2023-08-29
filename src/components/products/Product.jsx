@@ -16,7 +16,7 @@ export const Product = ({products}) => {
                         <div className="d-flex align-items-center justify-content-between mt-1">
                             <h6 className="font-weight-bold my-2">{prod.price}</h6>
                         </div>
-                    </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" className="ml-lg-5 order-1 order-lg-2"/>
+                    </div><img src="https://gofix.com.ar/wp-content/uploads/2022/01/A30s.jpeg" alt="Generic placeholder image" width="200" className="ml-lg-5 order-1 order-lg-2"/>
                     <div className='mt-4'>
                         <button type="button" className="btn btn-outline-primary">MeGusta: 0</button>
                     </div>

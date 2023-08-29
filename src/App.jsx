@@ -46,7 +46,8 @@ function App() {
   const [editProd, setEditProd] = useState();
   const [edit, setEdit] = useState(false);
  //const [user, setUser] = useState({isLogeed: false, name: null})
- const { user } = useContext(AuthContext);
+ const { state: user  } = useContext(AuthContext);
+ console.log(user)
 
   const onClickAddProducts = (e, form) => {
     e.preventDefault();
@@ -116,11 +117,12 @@ function App() {
                 <h1 className="display-4" style={{  fontWeight:'lighter'}}>Product Reducer</h1>
             </div>
         </div>
-        { user.isLogeed &&
+        
+        { user.isLogeed && ( 
         <div className="row"  style={{ backgroundColor: '#000', padding:50}}>
             <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} editProd={editProd} edit={edit} />
             <ListProduct products={products} deleteProducto={deleteProducto} editProducto={editProducto} edit={edit}/>
-        </div>
+        </div>)
         }
         <div className='row p-5'>
             <Product products={products} />
