@@ -12,7 +12,7 @@ export const AuthProvider = ({children}) => {
     //const [user, setUser] = useState({ isLogeed: false, name: null})
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    const login = () =>{
+    const login = () => {
         //reemplazo con el reducer
         //setUser({ isLogeed: true, name: 'Ariel Medina'})
         dispatch({
@@ -20,12 +20,18 @@ export const AuthProvider = ({children}) => {
             payload: 'Ariel Medina'
         })
     }
+    const logout = () => {
+        dispatch({
+            type: types.auth.logoutType
+        })
+    }
 
     return (
         <AuthContext.Provider value={{
             //user: user, esto reenplazo con state
             state,
-            login
+            login,
+            logout
         }}>
             {children}
         </AuthContext.Provider>

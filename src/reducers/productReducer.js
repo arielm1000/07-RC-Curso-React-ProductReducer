@@ -1,9 +1,9 @@
-
+import { types } from '../types/types'
 export const productReducer = ( state = [], action) => {
 
     switch (action.type) {
 
-        case '[Product] - ADD-PRODUCT':
+        case types.product.addType:
             return [
                 ...state,
                 action.payload
@@ -11,12 +11,12 @@ export const productReducer = ( state = [], action) => {
         //console.log('Agregar');
         //    break;
 
-        case '[Product] - DELETE-PRODUCT':
+        case types.product.deleteType:
             return action.payload
         //    console.log('delete');
         //    break;
 
-        case '[Product] - EDIT-PRODUCT':
+        case types.product.editType:
             return action.payload
         //    console.log('edit');
         //    break;
