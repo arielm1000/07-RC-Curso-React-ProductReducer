@@ -4,20 +4,52 @@ import { ListProduct } from './components/admin/ListProduct';
 import { Product } from './components/products/Product';
 import './styles/index.css';
 import { productReducer } from './reducers/productReducer';
+import   useForm from './hooks/useForm';
 import { AuthProvider } from './components/providers/AuthProvider';
 import { AuthContext } from './components/contexts/AuthContext';
 import { NavBar } from './components/admin/NavBar';
 import { types} from '../src/types/types';
 import { ProductContext } from './components/contexts/ProductContext';
+const initialProducts = [
+  {
+    id: 'sku-0001',
+    title: 'Galaxy AS3',
+    category: 'Celulares',
+    price: '$120.000',
+    description: 'Celular 5g con doble pantalla y 4 camaras'
+  },
+  {
+    id: 'sku-0002',
+    title: 'Galaxy A13',
+    category: 'Celulares',
+    price: '$80.000',
+    description: 'Celular 5g con, 3 Camaras'
+  },
+  {
+    id: 'sku-0003',
+    title: 'Galaxy A22 5g',
+    category: 'Celulares',
+    price: '$98.000',
+    description: 'Celular 5g con, 4 Camaras, 27mp'
+  },
+  {
+    id: 'sku-0004',
+    title: 'Galaxy A28 5g',
+    category: 'Celulares',
+    price: '$100.000',
+    description: 'Celular 5g con, 4 Camaras, 27mp'
+  }
+]
 
 function App() {
 
   //const [products, setProducts] = useState(initialProducts)
-  //const [ products, dispatch ] = useReducer(productReducer, initialProducts);
-  const { products }  = useContext(ProductContext);
+  const [ products, dispatch ] = useReducer(productReducer, initialProducts);
+  const {changeEdit, edit, productInit, form} = useForm();
+  //const { products }  = useContext(ProductContext);
   
   const [editProd, setEditProd] = useState();
-  const [edit, setEdit] = useState(false);
+ // const [edit, setEdit] = useState(false);
  //const [user, setUser] = useState({isLogeed: false, name: null})
  const { state: user  } = useContext(AuthContext);
  //console.log(user)
@@ -46,7 +78,9 @@ function App() {
         price: '',
         description: ''
       });
-      setEdit(new Date().getTime());
+      productInit();
+      changeEdit();
+      //setEdit(new Date().getTime());
   } else {
       const resulEdit = products.map((prd) => { if (prd.id === form.id) {return form} else {return prd} } )
       //console.log(resulEdit)
@@ -61,7 +95,7 @@ function App() {
         price: '',
         description: ''
       });
-      setEdit(false);
+      //setEdit(false);
 
   }
   }
@@ -77,7 +111,7 @@ function App() {
   const editProducto = (prd) => {
     //console.log(prd);
     setEditProd(prd);
-    setEdit(true);
+    changeEdit();
   }
   return (
     <>
