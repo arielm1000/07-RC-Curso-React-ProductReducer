@@ -90,7 +90,7 @@ function App() {
     changeEdit();
     productInit(prd);
   }
-  const keepEdit = (e) => {
+  const saveEdit = (e) => {
     e.preventDefault();
     const resulEdit = products.map((prd) => { if (prd.id === form.id) {return form} else {return prd} } )
      dispatch({
@@ -122,7 +122,7 @@ function App() {
         
         { user.isLogged && ( 
         <div className="row"  style={{ backgroundColor: '#000', padding:50}}>
-            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} keepEdit={(e)=>keepEdit(e)} form={form} onChangeForm={onChangeForm} edit={edit}/>
+            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} saveEdit={(e)=>saveEdit(e)} form={form} onChangeForm={onChangeForm} edit={edit}/>
             <ListProduct products={products} deleteProducto={deleteProducto} editProducto={editProducto} edit={edit}/>
         </div>
         )}

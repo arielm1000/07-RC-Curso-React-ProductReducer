@@ -8,7 +8,7 @@ const data = {
     description: 'Celular 5g con, 4 Camaras, 27mp'
   }
 
-export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEdit}) => {
+export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, saveEdit}) => {
     
     const titleRef = useRef(null);
     const categoryRef = useRef(null);
@@ -35,7 +35,7 @@ export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEd
                     className="form-control"  
                     placeholder="Titulo del  Producto"
                     name='title'
-                    value={form.title}
+                    value={form.title  || ''}
                     onChange={(e)=>onChangeForm(e.target.value, titleRef.current.name)}
                 />
             </div>
@@ -46,7 +46,7 @@ export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEd
                     className="form-control"  
                     placeholder="Categoria"
                     name='category'
-                    value={form.category}
+                    value={form.category  || ''}
                     onChange={(e)=>onChangeForm(e.target.value, categoryRef.current.name)}
                 />
             </div>
@@ -57,7 +57,7 @@ export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEd
                     className="form-control" 
                     placeholder="Precio"
                     name='price'
-                    value={form.price}
+                    value={form.price  || ''}
                     onChange={(e)=>onChangeForm(e.target.value, priceRef.current.name)} 
                 />
             </div>
@@ -68,12 +68,12 @@ export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEd
                     rows="3" 
                     placeholder='Descripcion del producto'
                     name='description'
-                    value={form.description}
+                    value={form.description  || ''}
                     onChange={(e)=>onChangeForm(e.target.value, descriptionRef.current.name)}
                     >
                 </textarea>
             </div>
-            <button className='btn btn-info' onClick={!edit ? (e)=>onClickAddProducts(e, form):(e)=>keepEdit(e)}>GUARDAR</button>
+            <button className='btn btn-info' onClick={!edit ? (e)=>onClickAddProducts(e, form):(e)=>saveEdit(e)}>GUARDAR</button>
         </form>
     </div>
   )
