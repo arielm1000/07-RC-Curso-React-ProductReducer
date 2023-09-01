@@ -45,11 +45,9 @@ function App() {
 
   //const [products, setProducts] = useState(initialProducts)
   const [ products, dispatch ] = useReducer(productReducer, initialProducts);
-  const {changeEdit, edit, productInit, form} = useForm();
+  const {changeEdit, edit, productInit, form, onChangeForm} = useForm();
   //const { products }  = useContext(ProductContext);
   
-  const [editProd, setEditProd] = useState();
- // const [edit, setEdit] = useState(false);
  //const [user, setUser] = useState({isLogeed: false, name: null})
  const { state: user  } = useContext(AuthContext);
  //console.log(user)
@@ -57,48 +55,28 @@ function App() {
   const onClickAddProducts = (e, form) => {
     e.preventDefault();
     console.log(form);
-    if(edit!=true) {
-      const newProductObjets = {
+
+    const newProductObjets = {
       id: new Date().getTime(),
       title: form.title,
       category: form.category,
       price: form.price,
       description: form.description
-      }
+    }
       //setProducts([...products, newProductObjets])
-      dispatch({
+    dispatch({
         type: types.product.addType,
         payload : newProductObjets
-      });
-
-      setEditProd({
-        id: '',
-        title: '',
-        category: '',
-        price: '',
-        description: ''
-      });
-      productInit();
-      changeEdit();
-      //setEdit(new Date().getTime());
-  } else {
-      const resulEdit = products.map((prd) => { if (prd.id === form.id) {return form} else {return prd} } )
-      //console.log(resulEdit)
-      dispatch({
-        type: types.product.editType,
-        payload : resulEdit
-      });
-      setEditProd({
-        id: '',
-        title: '',
-        category: '',
-        price: '',
-        description: ''
-      });
-      //setEdit(false);
-
-  }
-  }
+    });
+    const initProduct = {
+      id: '',
+      title: '',
+      category: '',
+      price: '',
+      description: ''
+    }
+    productInit(initProduct);
+    }
   const deleteProducto = (prdid)  => {
     //console.log(prdid);
     const resulDelete = products.filter((prd)=> prd.id != prdid);
@@ -109,10 +87,27 @@ function App() {
   }
 
   const editProducto = (prd) => {
-    //console.log(prd);
-    setEditProd(prd);
+    changeEdit();
+    productInit(prd);
+  }
+  const keepEdit = (e) => {
+    e.preventDefault();
+    const resulEdit = products.map((prd) => { if (prd.id === form.id) {return form} else {return prd} } )
+     dispatch({
+      type: types.product.editType,
+      payload : resulEdit
+    });
+    const initProduct = {
+      id: '',
+      title: '',
+      category: '',
+      price: '',
+      description: ''
+    }
+    productInit(initProduct);
     changeEdit();
   }
+
   return (
     <>
       <div className="container-fliud">
@@ -127,7 +122,7 @@ function App() {
         
         { user.isLogged && ( 
         <div className="row"  style={{ backgroundColor: '#000', padding:50}}>
-            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} editProd={editProd} edit={edit} />
+            <AddProduct onClickAddProducts={(e, value)=>onClickAddProducts(e,value)} keepEdit={(e)=>keepEdit(e)} form={form} onChangeForm={onChangeForm} edit={edit}/>
             <ListProduct products={products} deleteProducto={deleteProducto} editProducto={editProducto} edit={edit}/>
         </div>
         )}

@@ -8,7 +8,7 @@ const data = {
     description: 'Celular 5g con, 4 Camaras, 27mp'
   }
 
-export const AddProduct = ({onClickAddProducts, editProd, edit}) => {
+export const AddProduct = ({onClickAddProducts, form, onChangeForm, edit, keepEdit}) => {
     
     const titleRef = useRef(null);
     const categoryRef = useRef(null);
@@ -22,7 +22,7 @@ export const AddProduct = ({onClickAddProducts, editProd, edit}) => {
     //         [field]: value,
     //     })
     // }
-    const {form, onChangeForm} = useForm(editProd, edit);
+    //const {form, onChangeForm} = useForm(editProd, edit);
 
   return (
 
@@ -73,7 +73,7 @@ export const AddProduct = ({onClickAddProducts, editProd, edit}) => {
                     >
                 </textarea>
             </div>
-            <button className='btn btn-info' onClick={(e)=>onClickAddProducts(e, form)}>GUARDAR</button>
+            <button className='btn btn-info' onClick={!edit ? (e)=>onClickAddProducts(e, form):(e)=>keepEdit(e)}>GUARDAR</button>
         </form>
     </div>
   )

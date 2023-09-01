@@ -5,11 +5,6 @@ export default function useForm (initValues = {}) {
     const [form, setForm] = useState(initValues);
     const [edit, setEdit] = useState(false)
 
-    useEffect(() => {
-      setForm(initValues);
-    }, [edit])
-    
-
     const onChangeForm = (value, field) => {
        setForm({
             ...form,
@@ -21,14 +16,8 @@ export default function useForm (initValues = {}) {
        setEdit(!edit);
     }
 
-    const productInit = () => {
-      setForm({
-        id: '',
-        title: '',
-        category: '',
-        price: '',
-        description: ''
-      });
+    const productInit = (value) => {
+        setForm(value);
     }
 
   return {
